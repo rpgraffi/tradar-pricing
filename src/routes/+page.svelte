@@ -140,27 +140,6 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<div>
-			<h2>Average Price</h2>
-			<p>{averagePrice.toFixed(2)}</p>
-		</div>
-
-		<div>
-			<h2>Average Price of Last {totalTokensToConsider} Tokens</h2>
-			<p>{averagePriceLastXTokens.toFixed(2)}</p>
-		</div>
-
-		<div>
-			<h2>Average Price of Last {totalOffersToConsider} Offers</h2>
-			<p>{averagePriceLastXOffers.toFixed(2)}</p>
-		</div>
-
-		<div>
-			<h2>Weighted Average Price of Last {totalOffersToConsider2} Offers</h2>
-			<p>{weightedAveragePriceLastXOffers.toFixed(2)}</p>
-		</div>
-	</div>
 
 	<div class="container">
 		<div>
@@ -189,8 +168,8 @@
 					<tr>
 						<td>{price.averagePrice.toFixed(2)}</td>
 						<td>{price.averagePriceLastXTokens.toFixed(2)}</td>
-						<td>{price.averagePriceLastXOffers.toFixed(2)}</td>
-						<td>{price.weightedAveragePriceLastXOffers.toFixed(2)}</td>
+						<td class="price">{price.averagePriceLastXOffers.toFixed(2)}</td>
+						<td class="price">{price.weightedAveragePriceLastXOffers.toFixed(2)}</td>
 					</tr>
 				{/each}
 			</table>
@@ -202,7 +181,7 @@
 
 				{#each [...offers].reverse() as offer}
 					<tr>
-						<td>{offer.price}</td>
+						<td>{offer.price} €</td>
 						<td>{offer.tokens}</td>
 					</tr>
 				{/each}
@@ -216,6 +195,7 @@
 		text-align: start;
 		padding-right: 20px;
 		padding-bottom: 8px;
+        color: black;
 	}
 
 	td {
@@ -224,6 +204,10 @@
 	table.reference:nth-child(1) tr:nth-child(2) {
 		background-color: rgb(223, 223, 223);
 	}
+
+    tr .price:nth-child(-n+6) {
+        color:rgb(0, 137, 200);
+    }
 
 	p,
 	h1,
