@@ -32,7 +32,6 @@
             calculateWeightedAveragePriceOfLastXOffers(totalOffersToConsider2)
             updatePriceHistory();
             console.log(offers);
-            console.log(priceHistory    );
         }
     }
 
@@ -100,12 +99,14 @@
             weightedAveragePriceLastXOffers: weightedAveragePriceLastXOffers,  
         }];
     }
+    updatePriceHistory();
 </script>
 
 
 <div class="wrapper">
+    <h1>Tradar-Price-Calculator</h1>
 <div class="container">
-<div>
+    <div>
     <h2>Add New Offer</h2>
     <input type="number" placeholder="Price" bind:value={newPrice} />
     <input type="number" placeholder="Token Amount" bind:value={newTokenAmount} />
@@ -150,7 +151,7 @@
 <div class="container">
 
     <h2>Price History - newest first</h2>
-    <table>
+    <table class="reference">
         <tr>
             <th>Ø Price</th>
             <th>Ø Last {totalTokensToConsider} Tokens</th>
@@ -160,10 +161,10 @@
         
         {#each [...priceHistory].reverse() as price}
         <tr>
-            <th>{price.averagePrice.toFixed(2)}</th>
-            <th>{price.averagePriceLastXTokens.toFixed(2)}</th>
-            <th>{price.averagePriceLastXOffers.toFixed(2)}</th>
-            <th>{price.weightedAveragePriceLastXOffers.toFixed(2)}</th>
+            <td>{price.averagePrice.toFixed(2)}</td>
+            <td>{price.averagePriceLastXTokens.toFixed(2)}</td>
+            <td>{price.averagePriceLastXOffers.toFixed(2)}</td>
+            <td>{price.weightedAveragePriceLastXOffers.toFixed(2)}</td>
         </tr>
         {/each}
     </table>
@@ -175,18 +176,24 @@
 
     <style>
         
-th, td {
-  padding: 15px;
-  text-align: start;
+th {
+    text-align: start;
+    padding-right: 20px;
+    padding-bottom: 8px;
 }
 
-body, p, h1, h2, h3, th, table{
+td {
+    padding-bottom: 4px;
+}
+table.reference:nth-child(2) tr:nth-child(2)
+{
+    background-color:rgb(223, 223, 223);
+}
+
+p, h1, h2, th, table{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-body{
-    margin: auto;
-}
 
 h2 {
     font-size: 20px;
