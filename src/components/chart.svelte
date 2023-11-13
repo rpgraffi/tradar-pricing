@@ -12,10 +12,9 @@
 	const height = 300 - margin.top - margin.bottom;
 
 	const legendData = [
-		{ label: 'Average Price', color: 'steelblue' },
-		{ label: 'Average Price Last X Tokens', color: 'green' },
-		{ label: 'Average Price Last X Offers', color: 'red' },
-		{ label: 'Weighted Average Price Last X Offers', color: 'purple' }
+		{ label: 'Ø Last 20 Tokens', color: 'steelblue' },
+		{ label: 'Ø Last 5 Offers', color: 'red' },
+		{ label: 'Ø Last 5 weighted Offers', color: 'green' }
 	];
 
 	function createSvg() {
@@ -45,7 +44,6 @@
 				0,
 				d3.max(data, (d) =>
 					Math.max(
-						d.averagePrice,
 						d.averagePriceLastXTokens,
 						d.averagePriceLastXOffers,
 						d.weightedAveragePriceLastXOffers
@@ -56,10 +54,6 @@
 
 		// Define lines for each attribute
 		const lineGenerators = {
-			averagePrice: d3
-				.line()
-				.x((d, i) => x(i))
-				.y((d) => y(d.averagePrice)),
 			averagePriceLastXTokens: d3
 				.line()
 				.x((d, i) => x(i))
@@ -113,10 +107,9 @@
 
 	function getStrokeColor(attribute) {
 		const colors = {
-			averagePrice: 'steelblue',
-			averagePriceLastXTokens: 'green',
+			averagePriceLastXTokens: 'steelblue',
 			averagePriceLastXOffers: 'red',
-			weightedAveragePriceLastXOffers: 'purple'
+			weightedAveragePriceLastXOffers: 'green'
 		};
 		return colors[attribute];
 	}
