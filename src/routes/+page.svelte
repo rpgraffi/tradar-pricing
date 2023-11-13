@@ -132,6 +132,11 @@
 
 <div class="wrapper">
 	<h1>Tradar-Price-Calculator</h1>
+    <div class="container">
+		<div>
+			<h2>{offers.length} Offers & {totalTokens} Tokens.</h2>
+		</div>
+	</div>
 	<div class="container">
 		<div>
 			<h2>Add New Offer</h2>
@@ -162,14 +167,9 @@
 		</div>
 	</div>
 
-	<div class="container">
-		<div>
-			<h2>{offers.length} offers in total</h2>
-		</div>
 
-		<div>
-			<h2>{totalTokens} tokens in total</h2>
-		</div>
+    <div class="container">
+		<Chart data={priceHistory} />
 	</div>
 
 	<div class="container">
@@ -207,9 +207,7 @@
 			</table>
 		</div>
 	</div>
-	<div class="container">
-		<Chart data={priceHistory} />
-	</div>
+
 </div>
 
 <style>
