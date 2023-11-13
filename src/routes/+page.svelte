@@ -1,5 +1,5 @@
 <script>
-	import Chart from "../components/chart.svelte";
+	import Chart from '../components/chart.svelte';
 	let offers = [
 		{ price: 5, tokens: 3 },
 		{ price: 6, tokens: 1 },
@@ -31,20 +31,20 @@
 			averagePriceLastXTokens: 0,
 			averagePriceLastXOffers: 0,
 			weightedAveragePriceLastXOffers: 0
-		},
+		}
 	];
 	let newPrice = 0;
 	let newTokenAmount = 0;
 	let averagePrice = 0;
 
 	let averagePriceLastXTokens = 0;
-	const totalTokensToConsider = 20;
+	$: totalTokensToConsider = 20;
 
 	let averagePriceLastXOffers = 0;
-	const totalOffersToConsider = 5; // Change this to the number of last offers you want to consider
+	$: totalOffersToConsider = 5; // Change this to the number of last offers you want to consider
 
 	let weightedAveragePriceLastXOffers = 0;
-	const totalOffersToConsider2 = 5; // Change this to the number of last offers you want to consider
+	$: totalOffersToConsider2 = 5; // Change this to the number of last offers you want to consider
 
 	$: totalTokens = offers.reduce((total, offer) => total + offer.tokens, 0);
 
@@ -135,20 +135,36 @@
 	<div class="container">
 		<div>
 			<h2>Add New Offer</h2>
-            <label for="Price">Price
-                <input type="number" placeholder="eg. 10" bind:value={newPrice} />
-            </label>
-            <label for="Tokens">Tokens
-                <input type="number" placeholder="eg. 3" bind:value={newTokenAmount} />
-            </label>
+            <div class="row">
+                <div class="col">
+                    <label for="Price">Price</label>
+                    <input type="number" placeholder="eg. 10" bind:value={newPrice} />
+                </div>
+                <div class="col">
+                    <label for="Tokens">Tokens</label>
+                    <input type="number" placeholder="eg. 3" bind:value={newTokenAmount} />
+                </div>
+                <div class="col">
+                    <label for="tokensToConsider">Last {totalTokensToConsider} tokens</label>
+                    <input type="number" placeholder="eg. 10" bind:value={totalTokensToConsider} />
+                </div>
+                <div class="col">
+                    <label for="tokensToConsider">Last {totalOffersToConsider} tokens</label>
+                    <input type="number" placeholder="eg. 10" bind:value={totalOffersToConsider} />
+                </div>
+                <div class="col">
+                    <label for="tokensToConsider">Last {totalOffersToConsider2} weighted tokens</label>
+                    <input type="number" placeholder="eg. 10" bind:value={totalOffersToConsider2} />
+                </div>
+
+            </div>
 			<button on:click={addOffer}>Add Offer</button>
 		</div>
 	</div>
 
-
 	<div class="container">
 		<div>
-			<h2>{offers.length} offers in total </h2>
+			<h2>{offers.length} offers in total</h2>
 		</div>
 
 		<div>
@@ -184,17 +200,16 @@
 
 				{#each [...offers].reverse() as offer}
 					<tr>
-                            <td class="price">{offer.price} €</td>
-                            <td class="price">{offer.tokens}</td>
+						<td class="price">{offer.price} €</td>
+						<td class="price">{offer.tokens}</td>
 					</tr>
 				{/each}
 			</table>
 		</div>
 	</div>
-    <div class="container">
-        <Chart data={priceHistory}></Chart>
-
-    </div>
+	<div class="container">
+		<Chart data={priceHistory} />
+	</div>
 </div>
 
 <style>
@@ -202,7 +217,7 @@
 		text-align: start;
 		padding-right: 20px;
 		padding-bottom: 8px;
-        color: black;
+		color: black;
 	}
 
 	td {
@@ -212,22 +227,23 @@
 		background-color: rgb(223, 223, 223);
 	}
 
-    tr:nth-child(-n+6) .price {
-        color:rgb(0, 137, 200);
-    }
+	tr:nth-child(-n + 6) .price {
+		color: rgb(147, 0, 200);
+	}
 
 	p,
 	h1,
 	h2,
 	th,
-	table, label {
+	table,
+	label {
 		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 			Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	}
 
-    a{
-        text-decoration: none;
-    }
+	a {
+		text-decoration: none;
+	}
 
 	h2 {
 		font-size: 20px;
@@ -244,6 +260,10 @@
 	.row {
 		display: flex;
 		flex-direction: row;
+	}
+	.col {
+		display: flex;
+		flex-direction: column;
 	}
 
 	.container {
