@@ -1,4 +1,5 @@
 <script>
+	import Chart from "../components/chart.svelte";
 	let offers = [
 		{ price: 5, tokens: 3 },
 		{ price: 6, tokens: 1 },
@@ -8,28 +9,28 @@
 	];
 	let priceHistory = [
 		{
-			averagePrice: -1,
-			averagePriceLastXTokens: -1,
-			averagePriceLastXOffers: -1,
-			weightedAveragePriceLastXOffers: -1
+			averagePrice: 0,
+			averagePriceLastXTokens: 0,
+			averagePriceLastXOffers: 0,
+			weightedAveragePriceLastXOffers: 0
 		},
 		{
-			averagePrice: -1,
-			averagePriceLastXTokens: -1,
-			averagePriceLastXOffers: -1,
-			weightedAveragePriceLastXOffers: -1
+			averagePrice: 0,
+			averagePriceLastXTokens: 0,
+			averagePriceLastXOffers: 0,
+			weightedAveragePriceLastXOffers: 0
 		},
 		{
-			averagePrice: -1,
-			averagePriceLastXTokens: -1,
-			averagePriceLastXOffers: -1,
-			weightedAveragePriceLastXOffers: -1
+			averagePrice: 0,
+			averagePriceLastXTokens: 0,
+			averagePriceLastXOffers: 0,
+			weightedAveragePriceLastXOffers: 0
 		},
 		{
-			averagePrice: -1,
-			averagePriceLastXTokens: -1,
-			averagePriceLastXOffers: -1,
-			weightedAveragePriceLastXOffers: -1
+			averagePrice: 0,
+			averagePriceLastXTokens: 0,
+			averagePriceLastXOffers: 0,
+			weightedAveragePriceLastXOffers: 0
 		},
 	];
 	let newPrice = 0;
@@ -134,8 +135,12 @@
 	<div class="container">
 		<div>
 			<h2>Add New Offer</h2>
-			<input type="number" placeholder="Price" bind:value={newPrice} />
-			<input type="number" placeholder="Token Amount" bind:value={newTokenAmount} />
+            <label for="Price">Price
+                <input type="number" placeholder="eg. 10" bind:value={newPrice} />
+            </label>
+            <label for="Tokens">Tokens
+                <input type="number" placeholder="eg. 3" bind:value={newTokenAmount} />
+            </label>
 			<button on:click={addOffer}>Add Offer</button>
 		</div>
 	</div>
@@ -143,13 +148,11 @@
 
 	<div class="container">
 		<div>
-			<h2>Amount of offers {offers.length}</h2>
-			<p>{offers.length}</p>
+			<h2>{offers.length} offers in total </h2>
 		</div>
 
 		<div>
-			<h2>Amount of tokens</h2>
-			<p>{totalTokens}</p>
+			<h2>{totalTokens} tokens in total</h2>
 		</div>
 	</div>
 
@@ -181,13 +184,17 @@
 
 				{#each [...offers].reverse() as offer}
 					<tr>
-						<td>{offer.price} €</td>
-						<td>{offer.tokens}</td>
+                            <td class="price">{offer.price} €</td>
+                            <td class="price">{offer.tokens}</td>
 					</tr>
 				{/each}
 			</table>
 		</div>
 	</div>
+    <div class="container">
+        <Chart data={priceHistory}></Chart>
+
+    </div>
 </div>
 
 <style>
@@ -205,7 +212,7 @@
 		background-color: rgb(223, 223, 223);
 	}
 
-    tr .price:nth-child(-n+6) {
+    tr:nth-child(-n+6) .price {
         color:rgb(0, 137, 200);
     }
 
@@ -213,10 +220,14 @@
 	h1,
 	h2,
 	th,
-	table {
+	table, label {
 		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 			Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	}
+
+    a{
+        text-decoration: none;
+    }
 
 	h2 {
 		font-size: 20px;
