@@ -154,11 +154,11 @@
                     <input type="number" placeholder="eg. 10" bind:value={totalTokensToConsider} />
                 </div>
                 <div class="col">
-                    <label for="tokensToConsider">Last {totalOffersToConsider} tokens</label>
+                    <label for="tokensToConsider">Last {totalOffersToConsider} offers</label>
                     <input type="number" placeholder="eg. 10" bind:value={totalOffersToConsider} />
                 </div>
                 <div class="col">
-                    <label for="tokensToConsider">Last {totalOffersToConsider2} weighted tokens</label>
+                    <label for="tokensToConsider">Last {totalOffersToConsider2} weighted offers</label>
                     <input type="number" placeholder="eg. 10" bind:value={totalOffersToConsider2} />
                 </div>
 
